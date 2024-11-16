@@ -1,0 +1,566 @@
+
+@{
+    ViewBag.Title = "Add Student";
+    Layout = "~/Views/Shared/View_Ccommerce.cshtml";
+}
+
+
+
+<html lang="en">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:ital,wght@0,100;0,300;0,400;0,500;0,700;0,800;0,900;1,100;1,300;1,400;1,500;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=MuseoModerno:ital,wght@0,100..900;1,100..900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Add Student</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.css" />
+
+
+    <style>
+        .heading {
+            text-align: center;
+            font-size: 2rem;
+            font-family: "Quicksand", sans-serif;
+        }
+
+        .container {
+            margin-right: -1rem;
+            max-width: 88rem;
+            margin: 60px 7rem 11rem 13rem;
+            padding: 17px;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #f9f9f9;
+        }
+
+          
+            .container h1 {
+                text-align: center;
+            }
+
+      
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th {
+            background-color: #000000;
+            font-family: "Railway", sans-serif;
+            font-size: 20px;
+            color: white;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        td {
+            font-weight: 600;
+            font-size: 30px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            font-family: "Rajdhani", sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2rem;
+            color: black;
+            font-family: "Rajdhani", sans-serif;
+        }
+
+
+        .plus-button {
+            float: right;
+            background-color: #EAECEB;
+            border: none;
+            padding: 19.5px 36px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 30px;
+            margin-top: -5rem;
+            margin-bottom: 1rem;
+            cursor: pointer;
+        }
+
+            .plus-button:hover {
+                background-color: #70DCC5;
+                font-size: 35px;
+            }
+
+        .div {
+            margin-left: -17.2px;
+            margin-top: -38px;
+            width: 86.5rem;
+            height: 5rem;
+            margin-bottom: 4rem;
+            padding: 1px;
+        }
+
+        .dataTables_wrapper .dataTables_length {
+            display: none;
+        }
+
+        .dataTables_wrapper input {
+            width: 15%;
+            height: 39px;
+            border-radius: 5px;
+            margin-left: 5px;
+        }
+
+        .dataTables_wrapper label {
+            font-family: "Raleway", sans-serif;
+            font-optical-sizing: auto;
+            font-style: normal;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            margin-right: 15px;
+            font-size: 20px;
+        }
+
+        .dataTables_wrapper .dataTables_info {
+            float: right;
+            margin: 1rem;
+        }
+
+        .dataTables_empty {
+            text-align: center;
+        }
+
+        .modal-backdrop {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            z-index: 999;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            z-index: 1000;
+            width: 60rem;
+            height: 18rem;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+            .modal.active {
+                display: block;
+            }
+
+        .button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 2rem;
+            color: black;
+            font-family: "Rajdhani", sans-serif;
+        }
+
+        select {
+            width: 170px;
+            text-align: center;
+            padding: 6px;
+            margin-top: 10px;
+            border: none;
+            font-size: 15px;
+            font-weight: 600;
+            border-bottom: 1px solid;
+            border-radius: 5px;
+            box-sizing: border-box;
+            max-width: 170px;
+            font-family: "Rajdhani", sans-serif;
+        }
+        .error-message {
+            color: red;
+            font-size: 12px;
+            margin-top: 5px;
+            display: inline-block; 
+        }
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <div class="div" style="background-color: #EAECEB;">
+            <h1>Student List</h1>
+            <button class="plus-button" style="font-size:35px;" id="openModalBtn">+</button>
+        </div>
+
+        <select id="classid" class="form-control" style="float:right;font-size:18px;width:20rem;margin-right:2rem" onchange="_StudentList()">
+            <option value="0">--Filter By Class--</option>
+            @foreach (var item in Model.Rows)
+            {
+                <option value="@item["Id"]">@item["Class"]</option>
+            }
+
+        </select>
+
+        <table id="myTable" class="display">
+            <thead>
+                <tr>
+                    <th>Sr No.</th>
+                    <th>Name</th>
+                    <th>Roll No.</th>
+                    <th>Age</th>
+                    <th>Gaurdian Name</th>
+                    <th>Created On</th>
+
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+
+    <div class="modal" id="myModal">
+        <h2 style="text-align:center">Add Student</h2>
+        <button id="closeModalBtn" style="float:right;margin-top:-5rem;"><ion-icon name="close"></ion-icon></button>
+        <input type="text" id="sname" placeholder="Student Name" style="margin-bottom: 30px;" oninput="validateName(this)">
+        <span id="nameError" class="error-message"></span>
+        <input type="text" id="sroll" placeholder="Roll No." style="margin-bottom: 30px;">
+        <input type="text" id="age" placeholder="Age" style="margin-bottom: 10px;" oninput="validateAge(this)">
+        <span id="ageError" class="error-message"></span>
+        <input type="text" id="gname" placeholder="Gaurdian Name" style="margin-bottom: 10px;" oninput="validateName(this)">
+        <span id="nameError" class="error-message"></span>
+        <select id="class" class="form-control">
+            <option value="0">--Select CLass--</option>
+            @foreach (var item in Model.Rows)
+            {
+                <option value="@item["Id"]">@item["Class"]</option>
+            }
+
+        </select>
+        <form method="post" id="myForm" enctype="multipart/form-data">
+            <input type="file" id="imageFile" name="imageFile" enctype="multipart/form-data">
+        </form>
+
+
+
+
+        <button id="submitBtn" style="float:right;width:5rem;height:3rem;margin-top:1rem" onclick="saveStudent()">Save</button>
+
+    </div>
+
+</body>
+</html>
+
+
+
+<script src="https://cdn.datatables.net/1.10.8/js/jquery.dataTables.min.js" defer="defer"></script>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+
+        $('#myTable').DataTable();
+
+        _StudentList();
+
+    });
+    function validateName(input) {
+        var regex = /^[a-zA-Z\s]*$/;
+        var errorMessage = document.getElementById('nameError');
+
+        if (!regex.test(input.value)) {
+            errorMessage.textContent = 'Please enter alphabets only.';
+            input.style.borderColor = 'red'; 
+            input.setCustomValidity('Invalid input.');
+        } else {
+            errorMessage.textContent = '';
+            input.style.borderColor = ''; 
+            input.setCustomValidity('');
+        }
+    }
+
+    function validateAge(input) {
+        var errorMessage = document.getElementById('ageError');
+        var age = parseInt(input.value);
+
+        if (isNaN(age) || age >= 58) {
+            errorMessage.textContent = 'Please enter a number less than 58.';
+            input.style.borderColor = 'red'; 
+            input.setCustomValidity('Invalid input.'); 
+        } else {
+            errorMessage.textContent = '';
+            input.style.borderColor = ''; 
+            input.setCustomValidity('');
+        }
+    }
+</script>
+
+<script>
+
+  
+
+    const modal = document.getElementById('myModal');
+    const modalBackdrop = document.getElementById('modalBackdrop');
+    const openModalBtn = document.getElementById('openModalBtn');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+
+
+    openModalBtn.addEventListener('click', function () {
+        modal.classList.add('active');
+        modalBackdrop.style.display = 'block';
+    });
+
+    // Function to close the modal
+    closeModalBtn.addEventListener('click', function () {
+        modal.classList.remove('active');
+        modalBackdrop.style.display = 'none';
+    });
+
+
+    var vSID = 0;
+
+
+    function saveStudent() {
+
+        var StudentName = $('#sname').val();
+        var StudentRollno = $('#sroll').val();
+        var Age = $('#age').val();
+        var Class = $('#class').val();
+        var GaurdianName = $('#gname').val();
+        var classid = ($('#class option:selected').val()).toString();
+
+        if (StudentName === '' || StudentRollno === '' || Age === '' || Class === '0' || GaurdianName === '') {
+            alert('Please fill in all required fields.');
+            return;
+        }
+
+        var formData = new FormData($('#myForm')[0]);
+        formData.append('Id', vSID);
+        formData.append('StudentName', StudentName);
+        formData.append('StudentRollno', StudentRollno);
+        formData.append('Age', Age);
+        formData.append('Class', Class);
+        formData.append('GaurdianName', GaurdianName);
+
+
+
+
+        $.ajax({
+            type: "POST",
+            url: "/Home/_StudentSave",
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (response) {
+
+
+                if (response.success) {
+                    alert('Record Saved Succesfully');
+                    window.location.href = response.redirectUrl;
+                } else {
+                    console.log("Error Adding Details");
+                }
+            },
+            error: function (xhr, status, error) {
+
+                console.error("Error Adding Details", error);
+            }
+        });
+    }
+
+
+    function _StudentList() {
+
+
+
+
+        var classid = ($('#classid option:selected').val()).toString();
+
+        var formData = new FormData();
+
+        formData.append("classid", classid);
+
+        debugger;
+
+
+
+        $.ajax({
+            type: "POST",
+            url: "/Home/_StudentList",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (data) {
+
+                $('#ProgressImg').hide();
+                var obj = $.parseJSON(data);
+                var table = $('#myTable').DataTable();
+                table.clear().draw();
+                var msr = 0;
+
+                $.each(obj, function (key, value) {
+
+
+                    msr = msr + 1;
+
+
+                    var elmntArray = [
+                        msr,
+                        value.StudentName, value.StudentRollno, value.Age, value.GaurdianName, value.CreatedDate
+                    ];
+                    table.row.add(elmntArray).draw(false);
+
+                });
+            }
+
+        });
+    }
+
+
+
+    //function _StudentList() {
+    //    $('#ProgressImg').show();
+    //    $.post('/Home/_StudentList', {
+
+    //        'class': classid
+
+    //    }, function (data) {
+    //        $('#ProgressImg').hide();
+    //        var obj = $.parseJSON(data);
+    //        var table = $('#myTable').DataTable();
+    //        table.clear().draw();
+    //        var msr = 0;
+    //        $.each(obj, function (key, value) {
+
+    //            msr = msr + 1;
+
+
+    //            var elmntArray = [
+    //                msr,
+    //                value.StudentName, value.StudentRollno, value.Age, value.GaurdianName
+
+    //            ];
+    //            table.row.add(elmntArray).draw(false);
+    //        });
+    //    });
+    //}
+</script>
+
+
+data access
+using System;
+using System.Data;
+using System.Data.SqlClient;
+using System.Collections;
+using System.Configuration;
+
+namespace FTIsolution
+{
+    public class DataAccess
+    {
+        private SqlConnection sqlConnection;
+        string connectionString = ConfigurationManager.ConnectionStrings["CC"].ConnectionString;
+        public DataAccess()
+        {
+
+            sqlConnection = new SqlConnection(connectionString);
+        }
+
+        public DataTable fillDataTable(string procName, string qry, SortedList list)
+        {
+            DataTable dataTable = new DataTable();
+
+            try
+            {
+
+                if (sqlConnection.State != ConnectionState.Open)
+                {
+                    sqlConnection.Open();
+                }
+
+                SqlCommand sqlCommand = new SqlCommand();
+                sqlCommand.Connection = sqlConnection;
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.CommandText = procName;
+
+                foreach (DictionaryEntry entry in list)
+                {
+                    sqlCommand.Parameters.AddWithValue(entry.Key.ToString(), entry.Value);
+                }
+
+
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+                sqlDataAdapter.Fill(dataTable);
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine("Error: " + ex.Message);
+            }
+            finally
+            {
+
+                if (sqlConnection.State == ConnectionState.Open)
+                {
+                    sqlConnection.Close();
+                }
+            }
+
+            return dataTable;
+        }
+    }
+}   
+
+COmmon
+
+using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Web;
+
+
+namespace FTIsolution
+{
+    public class Connection
+    {
+        public SqlConnection con;
+
+        public Connection()
+        {
+            con = new SqlConnection(ConfigurationManager.ConnectionStrings["CC"].ConnectionString);
+        }
+    }
+}
+
+
+
+
