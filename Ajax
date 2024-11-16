@@ -561,6 +561,21 @@ namespace FTIsolution
     }
 }
 
+ public ActionResult _CommitteeMemberSubmit()
+        {
+            SortedList list = new SortedList();
+            list.Add("@CmtMemberId", Request.Form["MemberId"].ToString());
+            list.Add("@MemberName", Request.Form["Name"].ToString());
+            list.Add("@DesignationId", Request.Form["DesignationId"].ToString());
+            list.Add("@DeptId", Request.Form["DeptId"].ToString());
+            list.Add("@Mobileno", Request.Form["MobileNo"].ToString());
+            list.Add("@EmailId", Request.Form["email"].ToString());
+            list.Add("@CreatedBy", Session["EmpId"].ToString());
+            list.Add("@DepartmentAddress", Request.Form["DepartmentAddress"].ToString());
+            list.Add("@IsActive", Request.Form["IsActive"].ToString());
+            string mes = comfun.executeNonQueryWMessage("HpsedcCommitteeMember_AcceptUpdate", "", list).ToString();
 
+            return Json(mes);
+        }
 
 
